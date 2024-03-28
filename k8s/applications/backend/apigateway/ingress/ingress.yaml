@@ -1,7 +1,8 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: apigateway-ingress
+  namespace: egov-msa
   labels:
     env: production
     tier: backend
@@ -13,6 +14,9 @@ spec:
       http:
         paths:
           - path: /
+            pathType: ImplementationSpecific
             backend:
-              serviceName: apigateway
-              servicePort: 8000
+              service:
+                name: apigateway
+                port:
+                  number: 8000

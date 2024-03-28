@@ -2,6 +2,7 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: reserve-check-service-hpa-cpu
+  namespace: egov-msa
   labels:
     env: production
     tier: backend

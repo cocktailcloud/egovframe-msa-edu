@@ -3,8 +3,8 @@ kind: Kustomization
 resources:
 - portal/service.yaml
 - admin/service.yaml
-- portal/ingress/ingress.yaml
-- admin/ingress/ingress.yaml
+#- portal/ingress/ingress.yaml
+#- admin/ingress/ingress.yaml
 - portal/deployment.yaml
 - admin/deployment.yaml
 - portal/autoscaler.yaml
@@ -20,16 +20,16 @@ images:
   newTag: latest
 
 
-patches:
-- target:
-    name: frontend-portal-ingress
-  patch: |-
-    - op: replace
-      path: /spec/rules/0/host
-      value: "<TODO: 프론트엔드 포털 도메인>"
-- target:
-    name: frontend-admin-ingress
-  patch: |-
-    - op: replace
-      path: /spec/rules/0/host
-      value: "<TODO: 프론트엔드 관리자 도메인>"
+#patches:
+#- target:
+#    name: frontend-portal-ingress
+#  patch: |-
+#    - op: replace
+#      path: /spec/rules/0/host
+#      value: "<TODO: 프론트엔드 포털 도메인>"
+#- target:
+#    name: frontend-admin-ingress
+#  patch: |-
+#    - op: replace
+#      path: /spec/rules/0/host
+#      value: "<TODO: 프론트엔드 관리자 도메인>"

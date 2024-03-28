@@ -2,6 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pvc
+  namespace: egov-msa
   labels:
     env: production
     tier: database
@@ -13,4 +14,4 @@ spec:
   resources:
     requests:
       storage: 5Gi
-  storageClassName: nfs
+  storageClassName: nfs-csi

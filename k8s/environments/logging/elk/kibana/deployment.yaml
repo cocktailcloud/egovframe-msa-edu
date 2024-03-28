@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kibana-deployment
+  namespace: egov-msa
   labels:
     env: production
     tier: backend
@@ -28,14 +29,21 @@ spec:
         image: docker.elastic.co/kibana/kibana:7.10.1
         env:
           - name: ELASTICSEARCH_URL
-            value: http://elasticsearch.default.svc.cluster.local:9200
+            value: http://elasticsearch.egov-msa.svc.cluster.local:9200
           - name: ELASTICSEARCH_HOSTS
-            value: '["http://elasticsearch.default.svc.cluster.local:9200"]'
+            value: '["http://elasticsearch.egov-msa.svc.cluster.local:9200"]'
           - name: TZ
             valueFrom:
               configMapKeyRef:
                 name: common-configmap
                 key: TZ
+        resources:
+          requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
+            cpu: 1
+            memory: 1Gi
         ports:
         - containerPort: 5601
           name: http

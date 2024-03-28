@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: logstash-configmap
+  namespace: egov-msa
   labels:
     env: production
     tier: backend
@@ -20,7 +21,7 @@ data:
 
     output {
       elasticsearch {
-        hosts => "http://elasticsearch.default.svc.cluster.local:9200"
+        hosts => "http://elasticsearch.egov-msa.svc.cluster.local:9200"
       }
     }
   logstash.yml: |-

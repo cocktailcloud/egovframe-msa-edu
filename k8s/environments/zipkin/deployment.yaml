@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: zipkin-deployment
+  namespace: egov-msa
   labels:
     env: production
     tier: backend
@@ -35,6 +36,13 @@ spec:
                 configMapKeyRef:
                   name: common-configmap
                   key: TZ
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 1
+              memory: 1Gi
           startupProbe:
             httpGet:
               path: /zipkin/

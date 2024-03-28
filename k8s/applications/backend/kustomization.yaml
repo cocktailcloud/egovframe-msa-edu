@@ -9,8 +9,8 @@ resources:
 - board-service/service.yaml
 - reserve-request-service/service.yaml
 - reserve-check-service/service.yaml
-- discovery/ingress/ingress.yaml
-- apigateway/ingress/ingress.yaml
+#- discovery/ingress/ingress.yaml
+#- apigateway/ingress/ingress.yaml
 - config/deployment.yaml
 - discovery/deployment.yaml
 - portal-service/deployment.yaml
@@ -60,16 +60,16 @@ images:
   newTag: latest
 
 
-patches:
-- target:
-    name: apigateway-ingress
-  patch: |-
-    - op: replace
-      path: /spec/rules/0/host
-      value: "<TODO: 백엔드 API 게이트웨이 도메인>"
-- target:
-    name: discovery-ingress
-  patch: |-
-    - op: replace
-      path: /spec/rules/0/host
-      value: "<TODO: 백엔드 유레카 서버 도메인>"
+#patches:
+#- target:
+#    name: apigateway-ingress
+#  patch: |-
+#    - op: replace
+#      path: /spec/rules/0/host
+#      value: "<TODO: 백엔드 API 게이트웨이 도메인>"
+#- target:
+#    name: discovery-ingress
+#  patch: |-
+#    - op: replace
+#      path: /spec/rules/0/host
+#      value: "<TODO: 백엔드 유레카 서버 도메인>"

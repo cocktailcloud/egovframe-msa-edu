@@ -1,7 +1,8 @@
-apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: frontend-portal-ingress
+  namespace: egov-msa
   labels:
     env: production
     tier: frontend
@@ -13,6 +14,9 @@ spec:
       http:
         paths:
           - path: /
+            pathType: ImplementationSpecific
             backend:
-              serviceName: frontend-portal
-              servicePort: 3000
+              service:
+                name: frontend-portal
+                port:
+                  number: 3000

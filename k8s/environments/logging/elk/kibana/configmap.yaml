@@ -3,6 +3,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: kibana-configmap
+  namespace: egov-msa
   labels:
     env: production
     tier: backend
