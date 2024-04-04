@@ -74,11 +74,18 @@ spec:
                 configMapKeyRef:
                   name: backend-configmap
                   key: RABBITMQ_HOSTNAME
+          resources:
+            requests:
+              cpu: 1
+              memory: 2Gi
+            limits:
+              cpu: 2
+              memory: 4Gi
           startupProbe:
             httpGet:
               path: /actuator/health
               port: 80
-            initialDelaySeconds: 10
+            initialDelaySeconds: 30
             periodSeconds: 5
             successThreshold: 1
             failureThreshold: 36
@@ -86,7 +93,7 @@ spec:
             httpGet:
               path: /actuator/health
               port: 80
-            initialDelaySeconds: 10
+            initialDelaySeconds: 40
             periodSeconds: 10
             successThreshold: 1
             failureThreshold: 3

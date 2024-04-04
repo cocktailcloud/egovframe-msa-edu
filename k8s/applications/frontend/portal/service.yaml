@@ -13,7 +13,7 @@ spec:
     - name: frontend-portal-http
       port: 3000
       targetPort: 3000
-      nodePort: 30012
+      nodePort: 30112
   selector:
     env: production
     tier: frontend

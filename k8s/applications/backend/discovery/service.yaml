@@ -12,7 +12,7 @@ spec:
   ports:
     - port: 8761
       targetPort: 8761
-      nodePort: 30002
+      nodePort: 30102
   selector:
     env: production
     tier: backend
