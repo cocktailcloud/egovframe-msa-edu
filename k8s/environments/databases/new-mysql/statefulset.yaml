@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql
-  namespace: egov-msa
   labels:
     env: production
     tier: database
@@ -138,7 +137,7 @@ spec:
             - |
               set -ex
               cd /var/lib/mysql
-              
+
               # 복제된 데이터의 binlog 위치를 확인.
               if [[ -f xtrabackup_slave_info && "x$(<xtrabackup_slave_info)" != "x" ]]; then
                 # XtraBackup은 기존 레플리카에서 복제하기 때문에
@@ -153,12 +152,12 @@ spec:
                 echo "CHANGE MASTER TO MASTER_LOG_FILE='${BASH_REMATCH[1]}',\
                       MASTER_LOG_POS=${BASH_REMATCH[2]}" > change_master_to.sql.in
               fi
-              
+
               # Replication을 시작하여 복제를 완료해야 하는지 확인.
               if [[ -f change_master_to.sql.in ]]; then
                 echo "Waiting for mysqld to be ready (accepting connections)"
                 until mysql -h 127.0.0.1 -e "SELECT 1"; do sleep 1; done
-              
+
                 echo "Initializing replication from clone position"
                 mysql -h 127.0.0.1 \
                       -e "$(<change_master_to.sql.in), \
@@ -170,7 +169,7 @@ spec:
                 # 컨테이너가 다시 시작하는 경우, 이 작업을 한번만 시도한다.
                 mv change_master_to.sql.in change_master_to.sql.orig
               fi
-              
+
               # 피어가 요청할 때 서버를 시작하여 백업을 보냄.
               exec ncat --listen --keep-open --send-only --max-conns=1 3307 -c \
                 "xtrabackup --backup --slave-info --stream=xbstream --host=127.0.0.1 --user=root"
